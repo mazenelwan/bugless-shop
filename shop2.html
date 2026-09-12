@@ -1,0 +1,548 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+<link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+   <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
+<link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-...xxxx..." crossorigin="anonymous" />
+
+  <title>final project iti</title>
+
+  <link rel="stylesheet" href="shop2.css">
+<script src="product-data.js" defer></script>
+<script src="shop-product-links.js" defer></script>
+<script src="shop2 (4).js" defer></script> 
+</head>
+
+
+  <body>
+<!--  bar -->
+<header class="header" id="header">
+<nav class="navbar container">
+<a href="index.html" class="brand">Bugless Fit</a>
+<div class="search">
+<form class="search-form">
+<i class="bx bx-search search-icon"></i>
+ <input type="text" name="search" class="search-input" placeholder="Search for Destinations" autofocus>
+</form>
+</div>
+
+<div class="menu" id="menu">
+<ul class="menu-inner">
+<li><a href="index.html" class="menu-link ">HOME</a></li>
+<li><a href="shop2.html" class="menu-link active">SHOP</a></li>
+<li><a href="contact.html" class="menu-link">CONTACT</a></li>
+<li class="menu-item"><a href="about.html" class="menu-link">ABOUT</a></li>
+
+
+         </ul>
+      </div>
+
+      <div class="burger" id="burger">
+         <span class="burger-line"></span>
+         <span class="burger-line"></span>
+         <span class="burger-line"></span>
+      </div>
+   </nav>
+</header>
+
+<button type="button" id="cart-toggle-btn" class="cart-toggle-btn" aria-label="عربة التسوق">
+  <i class="fas fa-shopping-cart"></i>
+  <span id="cart-count-badge" class="cart-count-badge">0</span>
+</button>
+
+<!-- end of bar -->
+
+<!-- Products Section -->
+<div id="cart" class="cart-sidebar">
+  <h3>Shopping Cart</h3>
+  <div id="cart-items"></div>
+  <p>Total: EGP <span id="cart-total">0</span></p>
+  <button type="button" id="checkout-btn">Checkout</button>
+  <button type="button" id="clear-cart-btn">Clear Cart</button>
+</div>
+
+
+  <!-- Products -->
+   <h1 id="Men's Shirts">Men's Shirts</h1>
+  <div class="products">
+    <!-- Product 1 -->
+    <div class="product-card">
+      <img src="https://dfcdn.defacto.com.tr/6/F8314AX_25AU_KH244_01_01.jpg" alt="Oxford Shirt">
+      <div class="product-info">
+        <h3>Man Long Sleeve Shirt</h3>
+        <p>EGP 459 <span class="rating">(4.9⭐)</span></p>
+        <a href="#" class="add-btn">Add to cart</a>
+      </div>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="product-card">
+      <img src="https://dfcdn.defacto.com.tr/6/F6342AX_25AU_BG721_01_01.jpg" alt="Tunic">
+      <div class="product-info">
+        <h3>Man Long Sleeve Shirt</h3>
+        <p>EGP 459 <span class="rating">(4.4⭐)</span></p>
+        <a href="#" class="add-btn">Add to cart</a>
+      </div>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="product-card">
+      <img src="https://dfcdn.defacto.com.tr/6/F6342AX_25AU_BK81_01_01.jpg" alt="Huawei Watch Buds">
+      <div class="product-info">
+        <h3>Man Long Sleeve Shirt</h3>
+        <p>EGP 459 <span class="rating">(4.4⭐)</span></p>
+        <a href="#" class="add-btn">Add to cart</a>
+      </div>
+    </div>
+
+    <!-- Product 4 -->
+    <div class="product-card">
+      <img src="https://dfcdn.defacto.com.tr/6/F6342AX_25AU_BR496_01_01.jpg" alt="Short-Sleeve Shirt">
+      <div class="product-info">
+        <h3>Man Long Sleeve Shirt</h3>
+        <p>EGP 459 <span class="rating">(4.9⭐)</span></p>
+        <a href="#" class="add-btn">Add to cart</a>
+      </div>
+    </div>
+  </div>
+
+
+<h1 id="Jacket">Jacket</h1>
+  <div class="products">
+    <!-- Product 1 -->
+    <div class="product-card">
+      <img src="https://dfcdn.defacto.com.tr/6/D5977AX_25SP_BG73_01_01.jpg" alt="Oxford Shirt">
+      <div class="product-info">
+        <h3>Regular fit hooded zippered waterproof jacket</h3>
+        <p>EGP 2200 <span class="rating">(4.9⭐)</span></p>
+        <a href="#" class="add-btn">Add to cart</a>
+      </div>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="product-card">
+      <img src="https://dfcdn.defacto.com.tr/6/C6214AX_25AU_GR158_01_01.jpg" alt="Tunic">
+      <div class="product-info">
+        <h3>Slim Fit Stand up Called zippered jacket</h3>
+        <p>EGP 3000 <span class="rating">(4.4⭐)</span></p>
+        <a href="#" class="add-btn">Add to cart</a>
+      </div>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="product-card">
+      <img src="https://dfcdn.defacto.com.tr/6/D7534AX_25AU_BK27_01_01.jpg" alt="Huawei Watch Buds">
+      <div class="product-info">
+        <h3>Oversize Fit Velvet Puffer jacket</h3>
+        <p>EGP 4999 <span class="rating">(4.4⭐)</span></p>
+        <a href="#" class="add-btn">Add to cart</a>
+      </div>
+    </div>
+
+    <!-- Product 4 -->
+    <div class="product-card">
+      <img src="https://dfcdn.defacto.com.tr/6/E8819AX_25AU_NV175_01_02.jpg" alt="Short-Sleeve Shirt">
+      <div class="product-info">
+        <h3>Slim Fit Stand up Called zippered jacket</h3>
+        <p>EGP 3000<span class="rating">(4.9⭐)</span></p>
+        <a href="#" class="add-btn">Add to cart</a>
+      </div>
+    </div>
+  </div>
+
+  <h1 id="Pants">Pants</h1>
+  <div class="products">
+    <!-- Product 1 -->
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/6121rM3990L.AC_SX679.jpg" alt="Oxford Shirt">
+      <div class="product-info">
+        <h3>Regular Fit Flexible Leg Cargo Sweatpants</h3>
+        <p>EGP 999 <span class="rating">(3.9⭐)</span></p>
+        <a href="#" class="add-btn">Add to cart</a>
+      </div>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/51M89g3N4oL.AC_SX679.jpg" alt="Tunic">
+      <div class="product-info">
+        <h3>Slim Fit Double Pocket Standard Leg Sports Joggers</h3>
+        <p>EGP 999 <span class="rating">(4.5⭐)</span></p>
+        <a href="#" class="add-btn">Add to cart</a>
+      </div>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/615RRAT49wL.AC_SX679.jpg" alt="Huawei Watch Buds">
+      <div class="product-info">
+        <h3>Relax Fit Linen Look Straight Leg Cotton Trousers</h3>
+        <p>EGP 999 <span class="rating">(4.6⭐)</span></p>
+        <a href="#" class="add-btn">Add to cart</a>
+      </div>
+    </div>
+
+    <!-- Product 4 -->
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/51JeL7CaFeL.AC_SX679.jpg" alt="Short-Sleeve Shirt">
+      <div class="product-info">
+        <h3>Slim Fit Double Pocket Standard Leg Sports Joggers</h3>
+        <p>EGP 999 <span class="rating">(4.7⭐)</span></p>
+        <a href="#" class="add-btn">Add to cart</a>
+      </div>
+    </div>
+  </div>
+
+  <h1 id="T-Shirts">T-Shirts</h1>
+
+  <div class="products">
+    <!-- Product 1 -->
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/71BhTPORZuL.AC_SX522.jpg" alt="Oxford Shirt">
+      <div class="product-info">
+        <h3>Oversize T-Shirt</h3>
+        <p>EGP 499 <span class="rating">(4.2⭐)</span></p>
+        <a href="#" class="add-btn">Add to cart</a>
+      </div>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/71ayg6Ml9cL.AC_SX522.jpg" alt="Tunic">
+      <div class="product-info">
+        <h3>Oversize T-Shirt</h3>
+        <p>EGP 499 <span class="rating">(4.1⭐)</span></p>
+        <a href="#" class="add-btn">Add to cart</a>
+      </div>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/71c7Hb3Ya7L.AC_SX679.jpg" alt="Huawei Watch Buds">
+      <div class="product-info">
+        <h3>Oversize T-Shirt</h3>
+        <p>EGP 499 <span class="rating">(4.4⭐)</span></p>
+        <a href="#" class="add-btn">Add to cart</a>
+      </div>
+    </div>
+
+    <!-- Product 4 -->
+    <div class="product-card">
+      <img src="https://m.media-amazon.com/images/I/71jPSDNxBjL.AC_SX522.jpg" alt="Short-Sleeve Shirt">
+      <div class="product-info">
+        <h3>Oversize T-Shirt</h3>
+        <p>EGP 499 <span class="rating">(4.3⭐)</span></p>
+        <a href="#" class="add-btn">Add to cart</a>
+      </div>
+    </div>
+  </div>
+
+  <h1 id="Polo">Polo</h1>
+
+   <div class="products">
+    <!-- Product 1 -->
+    <div class="product-card">
+      <img src="https://dfcdn.defacto.com.tr/6/D7932AX_25SP_NV135_01_02.jpg" alt="Oxford Shirt">
+      <div class="product-info">
+        <h3>polo Shirt</h3>
+        <p>EGP 549  <span class="rating">(4.6⭐)</span></p>
+        <a href="#" class="add-btn">Add to cart</a>
+      </div>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="product-card">
+      <img src="https://dfcdn.defacto.com.tr/6/E2888AX_25SP_BK27_01_01.jpg" alt="Tunic">
+      <div class="product-info">
+        <h3>polo Shirt</h3>
+        <p>EGP 549  <span class="rating">(3.4⭐)</span></p>
+        <a href="#" class="add-btn">Add to cart</a>
+      </div>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="product-card">
+      <img src="https://dfcdn.defacto.com.tr/6/E1209AX_25SM_GR265_01_01.jpg" alt="Huawei Watch Buds">
+      <div class="product-info">
+        <h3>polo Shirt</h3>
+        <p>EGP 549  <span class="rating">(4.5⭐)</span></p>
+        <a href="#" class="add-btn">Add to cart</a>
+      </div>
+    </div>
+
+    <!-- Product 4 -->
+    <div class="product-card">
+      <img src="https://dfcdn.defacto.com.tr/6/E2633AX_25SM_GN1113_01_03.jpg" alt="Short-Sleeve Shirt">
+      <div class="product-info">
+        <h3>polo Shirt</h3>
+        <p>EGP 549  <span class="rating">(4.8⭐)</span></p>
+        <a href="#" class="add-btn">Add to cart</a>
+      </div>
+    </div>
+  </div>
+
+  <h1 id="Shoes">Shoes</h1>
+
+   <div class="products">
+    <!-- Product 1 -->
+    <div class="product-card">
+      <img src="https://pronto-eg.com/cdn/shop/products/0212-1_copy_1b5e2b70-5888-4aa7-b592-b143bd3ba487.jpg?v=1748425483&width=640" alt="Oxford Shirt">
+      <div class="product-info">
+        <h3>Plain Toe Blucher</h3>
+        <p>EGP 450 <span class="rating">(4.9⭐)</span></p>
+        <a href="#" class="add-btn">Add to cart</a>
+      </div>
+    </div>
+
+    <!-- Product 2 -->
+    <div class="product-card">
+      <img src="https://pronto-eg.com/cdn/shop/products/15052-1-5_copy_27f4143b-53f1-458f-b0fa-1365141d6f4a.jpg?v=1671282625&width=640" alt="Tunic">
+      <div class="product-info">
+        <h3>Chelsea Boot</h3>
+        <p>EGP 900 <span class="rating">(4.4⭐)</span></p>
+        <a href="#" class="add-btn">Add to cart</a>
+      </div>
+    </div>
+
+    <!-- Product 3 -->
+    <div class="product-card">
+      <img src="https://pronto-eg.com/cdn/shop/products/0301-5-5_copy_3982c7d4-783d-4b37-afe3-41b4be13e965.jpg?v=1671281262&width=640" alt="Huawei Watch Buds">
+      <div class="product-info">
+        <h3>Oxford Limit</h3>
+        <p>EGP 550 <span class="rating">(4.4⭐)</span></p>
+        <a href="#" class="add-btn">Add to cart</a>
+      </div>
+    </div>
+
+    <!-- Product 4 -->
+    <div class="product-card">
+      <img src="https://pronto-eg.com/cdn/shop/products/15010-1-5_copy_c7c372b2-2d4e-429e-87da-f61e0eb7d72e.jpg?v=1671282591&width=640" alt="Short-Sleeve Shirt">
+      <div class="product-info">
+        <h3>Rock</h3>
+        <p>EGP 700 <span class="rating">(4.9⭐)</span></p>
+        <a href="#" class="add-btn">Add to cart</a>
+      </div>
+    </div>
+  </div>
+
+
+
+
+ 
+ <section id="about-section" class="p-100 pb-2 bg-one-dark">
+    <div class="container">
+      <div class="row d-flex align-items-end">
+        <div class="col-md-6 text-center">
+       
+        </div>
+        <div class="col-md-6">
+          <p class="color-base">ABOUT US!</p>
+          <h2 class="text-white mb-4">My Real Life is Up to You? I am a <span class="color-base">Front-end Developer</span>
+          </h2>
+          <p>I am a Computer Science student from Egypt, interested in both front-end and back-end development. I work with C, Python, and JavaScript, and I aim to grow into a skilled full-stack developer.
+          </p>
+          <div class="row">
+            <div class="col-md-6 about-bullet">
+              <ul class="bullet-check">
+                <li>Front-end Development</li>
+                <li>Back-end Development</li>
+                <li>Strong knowledge of C Programming</li>
+              </ul>
+            </div>
+            <div class="col-md-6 about-bullet">
+              <ul class="bullet-check">
+                <li>Python Programming</li>
+                <li>Problem Solving & Algorithms</li>
+                <li>Continuous Learning in Full-Stack Development</li>
+              </ul>
+            </div>
+          </div>
+
+
+          <div class="wrap-button mt-50">
+        <a href="https://drive.google.com/file/d/1iimulldfe2w5Utqos4gdT5h1-ybzE8fO/view?usp=drive_link" target="_blank" 
+           class="btn btn-medium btn-inline btn-fill mr-4">Cv Download</a>
+
+          </div>
+        </div>
+      </div>
+
+
+      <div class="about-info-wrap p-100">
+        <div class="about-info p-5">
+          <div class="row">
+            <div class="col-md-4">
+              <h6 class="text-white text-uppercase mb-4">Contact Now</h6>
+              <p>
+  <i class="fas fa-envelope-open-text mr-2 color-base"></i>
+  <a href="mailto:mazenelwan246@gmail.com" 
+     style="color: inherit; text-decoration: none;">
+     mazenelwan246@gmail.com
+  </a>
+</p>
+
+              <p>
+  <i class="fas fa-phone-alt mr-2 color-base"></i>
+  <a href="tel:+201140436386" style="color: inherit; text-decoration: none;">
+    01140436386
+  </a>
+</p>
+
+            </div>
+            <div class="col-md-4">
+              <h6 class="text-white text-uppercase mb-4">Address</h6>
+
+           <p>
+  <i class="fas fa-map-marker-alt mr-2 color-base"></i>
+  <a href="https://www.google.com/maps/place/4+Talaat+Harb+Square,+Cairo" 
+     target="_blank" 
+     style="color: inherit; text-decoration: none;">
+     4 Talaat Harb Square – Downtown – Cairo – Egypt
+  </a>
+</p>
+            </div>
+            <div class="col-md-4">
+              <h6 class="text-white text-uppercase mb-4">Social Media</h6>
+              <p><i class="far fa-comment-alt mr-2 color-base"></i>Also find us social media below</p>
+
+
+<div class="inline-social">
+  <ul>
+    <li><a href="https://www.facebook.com/share/16zsXM9CkC/?mibextid=wwXIfr" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
+    <li><a href="https://www.linkedin.com/in/mazen-elwan-67719b358" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
+    <li><a href="https://www.instagram.com/mazenelwan_official?igsh=MWowaDhsazdrZHgxdw%3D%3D&utm_source=qr" target="_blank"><i class="fab fa-instagram"></i></a></li>
+    <li><a href="https://www.tiktok.com/@mazen_elwan_official?_t=ZS-905JLe3GUPI&_r=1" target="_blank"><i class="fab fa-tiktok"></i></a></li>
+  </ul>
+</div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Optional JavaScript -->
+  <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script>
+// Shopping Cart Logic
+const addBtns = document.querySelectorAll('.add-btn');
+const cartItems = document.getElementById('cart-items');
+const cartTotal = document.getElementById('cart-total');
+const clearCartBtn = document.getElementById('clear-cart-btn');
+const checkoutBtn = document.getElementById('checkout-btn');
+const CART_STORAGE_KEY = 'bfCart';
+
+// Persist the cart so it survives navigating to checkout.html (and page
+// reloads). If nothing is saved yet, start empty exactly as before.
+let cart = [];
+try {
+  cart = JSON.parse(localStorage.getItem(CART_STORAGE_KEY)) || [];
+} catch (e) {
+  cart = [];
+}
+
+addBtns.forEach(btn => {
+  btn.addEventListener('click', (e) => {
+    e.preventDefault();
+    const productCard = e.target.closest('.product-card');
+    const name = productCard.querySelector('h3').innerText;
+    const price = parseFloat(productCard.querySelector('p').innerText.replace('EGP ', ''));
+
+    const existing = cart.find(item => item.name === name);
+    if(existing){
+      existing.qty += 1;
+    } else {
+      cart.push({name, price, qty: 1});
+    }
+    renderCart();
+  });
+});
+
+function renderCart() {
+  cartItems.innerHTML = '';
+  let total = 0;
+  let totalQty = 0;
+  cart.forEach((item, index) => {
+    total += item.price * item.qty;
+    totalQty += item.qty;
+    const div = document.createElement('div');
+    div.className = 'cart-item';
+    div.innerHTML = `
+      <span class="cart-item-name">${item.name}</span>
+      <div class="cart-item-controls">
+        <button type="button" class="qty-btn qty-decrease" data-index="${index}" aria-label="Decrease quantity">-</button>
+        <span class="cart-item-qty">${item.qty}</span>
+        <button type="button" class="qty-btn qty-increase" data-index="${index}" aria-label="Increase quantity">+</button>
+      </div>
+      <span class="cart-item-price">EGP ${(item.price * item.qty).toFixed(2)}</span>
+      <button type="button" class="remove-btn" data-index="${index}" aria-label="Remove item">&#10005;</button>
+    `;
+    cartItems.appendChild(div);
+  });
+  cartTotal.innerText = total.toFixed(2);
+  const cartBadge = document.getElementById('cart-count-badge');
+  if (cartBadge) cartBadge.textContent = totalQty;
+  try {
+    localStorage.setItem(CART_STORAGE_KEY, JSON.stringify(cart));
+  } catch (e) {
+    // localStorage unavailable (e.g. private mode) — cart still works
+    // for this session, it just won't carry over to checkout.html.
+  }
+}
+
+// Render once on load so the badge/panel reflect any saved cart immediately.
+renderCart();
+
+// Quantity +/- and remove: items are re-rendered each time, so use
+// event delegation on the container instead of re-binding per item.
+cartItems.addEventListener('click', (e) => {
+  const target = e.target.closest('button[data-index]');
+  if (!target) return;
+  const i = parseInt(target.getAttribute('data-index'), 10);
+  if (Number.isNaN(i) || !cart[i]) return;
+
+  if (target.classList.contains('qty-increase')) {
+    cart[i].qty += 1;
+  } else if (target.classList.contains('qty-decrease')) {
+    cart[i].qty -= 1;
+    if (cart[i].qty <= 0) {
+      cart.splice(i, 1); // reaching 0 removes the item, never goes negative
+    }
+  } else if (target.classList.contains('remove-btn')) {
+    cart.splice(i, 1);
+  }
+  renderCart();
+});
+
+// Clear the entire cart
+if (clearCartBtn) {
+  clearCartBtn.addEventListener('click', () => {
+    cart = [];
+    renderCart();
+  });
+}
+
+// Go to the checkout page (cart is already saved to localStorage above)
+if (checkoutBtn) {
+  checkoutBtn.addEventListener('click', () => {
+    window.location.href = 'checkout.html';
+  });
+}
+</script>
+    </body>
+
+</html>
