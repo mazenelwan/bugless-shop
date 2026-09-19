@@ -14,6 +14,19 @@
         <li class="menu-item"><a href="{% url 'store:shop' %}" class="menu-link{% if request.resolver_match.url_name == 'shop' or request.resolver_match.url_name == 'search' or request.resolver_match.url_name == 'product_detail' %} active{% endif %}">SHOP</a></li>
         <li class="menu-item"><a href="{% url 'store:contact' %}" class="menu-link{% if request.resolver_match.url_name == 'contact' %} active{% endif %}">CONTACT</a></li>
         <li class="menu-item"><a href="{% url 'store:about' %}" class="menu-link{% if request.resolver_match.url_name == 'about' %} active{% endif %}">ABOUT</a></li>
+        <li class="menu-item auth-menu-item">
+          {% if user.is_authenticated %}
+            <button type="button" class="account-avatar-btn" id="account-avatar-btn" aria-haspopup="true" aria-expanded="false" aria-label="Account menu">
+              <i class="bx bx-user"></i>
+            </button>
+          {% else %}
+            <div class="auth-links">
+              <a href="{% url 'accounts:login' %}" class="menu-link auth-link">LOG IN</a>
+              <span class="auth-sep">/</span>
+              <a href="{% url 'accounts:register' %}" class="menu-link auth-link">REGISTER</a>
+            </div>
+          {% endif %}
+        </li>
       </ul>
     </div>
 
@@ -24,4 +37,27 @@
     </div>
   </nav>
 </header>
+
+{% if user.is_authenticated %}
+<div class="account-overlay" id="account-overlay" hidden></div>
+<aside class="account-sidebar" id="account-sidebar" aria-hidden="true">
+  <div class="account-sidebar-header">
+    <span class="account-sidebar-avatar"><i class="bx bx-user"></i></span>
+    <div>
+      <p class="account-sidebar-name">{{ user.get_full_name|default:user.email }}</p>
+      <p class="account-sidebar-email">{{ user.email }}</p>
+    </div>
+    <button type="button" class="account-sidebar-close" id="account-sidebar-close" aria-label="Close menu"><i class="bx bx-x"></i></button>
+  </div>
+  <nav class="account-sidebar-nav">
+    <a href="{% url 'accounts:order_list' %}" class="account-sidebar-link"><i class="bx bx-receipt"></i> My Orders</a>
+    <a href="{% url 'accounts:profile' %}" class="account-sidebar-link"><i class="bx bx-user-circle"></i> My Profile</a>
+    <a href="{% url 'accounts:password_change' %}" class="account-sidebar-link"><i class="bx bx-lock-alt"></i> Change Password</a>
+  </nav>
+  <form method="post" action="{% url 'accounts:logout' %}" class="account-sidebar-logout">
+    {% csrf_token %}
+    <button type="submit" class="account-sidebar-link account-logout-btn"><i class="bx bx-log-out"></i> Log Out</button>
+  </form>
+</aside>
+{% endif %}
 
