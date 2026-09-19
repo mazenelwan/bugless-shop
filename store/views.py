@@ -1,9 +1,11 @@
 import json
 import logging
+import secrets
 import uuid
 
 from django.conf import settings
 from django.contrib import messages
+from django.contrib.auth import login as auth_login
 from django.core.exceptions import RequestDataTooBig
 from django.http import Http404, JsonResponse
 from django.shortcuts import get_object_or_404, redirect, render
@@ -11,6 +13,7 @@ from django.urls import reverse
 from django.views.decorators.cache import never_cache
 from django.views.decorators.http import require_GET, require_http_methods, require_POST
 
+from accounts.models import User as AccountUser
 from .forms import ContactForm
 from .models import Order
 from .selectors import public_categories, public_products, related_products
@@ -266,6 +269,34 @@ def quote_order(request):
     return JsonResponse({"ok": True, "data": pricing_data(pricing)}, status=200)
 
 
+def _auto_register_guest(request, order):
+    """
+    A guest checkout is treated as an implicit registration: create an
+    account from the details already typed into the checkout form, link
+    the order to it, and log the customer in immediately. Skipped if the
+    shopper is already signed in, the order is already linked to an
+    account (e.g. an idempotent replay), or an account with that email
+    already exists (avoid silently taking over someone else's account).
+    """
+    if request.user.is_authenticated or order.customer_id:
+        return
+    if AccountUser.objects.filter(email__iexact=order.email).exists():
+        return
+
+    full_name = (order.customer_name or "").strip()
+    first_name, _, last_name = full_name.partition(" ")
+    user = AccountUser.objects.create_user(
+        email=order.email,
+        password=secrets.token_urlsafe(32),
+        first_name=first_name[:150],
+        last_name=last_name[:150],
+    )
+    order.customer = user
+    order.save(update_fields=("customer",))
+    user.backend = "django.contrib.auth.backends.ModelBackend"
+    auth_login(request, user)
+
+
 @require_POST
 @never_cache
 def create_order(request):
@@ -282,6 +313,8 @@ def create_order(request):
             },
         )
         return _checkout_error_response(error)
+
+    _auto_register_guest(request, result.order)
 
     data = order_data(result)
     data["confirmationUrl"] = reverse(
