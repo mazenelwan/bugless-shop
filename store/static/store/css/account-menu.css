@@ -1,0 +1,186 @@
+/* ============================================
+   Account menu: Log in / Register links, the
+   logged-in avatar button, and the account
+   sidebar (My Orders / Profile / Log out).
+   Self-contained so it looks consistent across
+   every page regardless of that page's own CSS
+   variables.
+   ============================================ */
+
+.auth-menu-item {
+  display: flex;
+  align-items: center;
+}
+
+.auth-links {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.auth-link {
+  white-space: nowrap;
+}
+
+.auth-sep {
+  color: hsl(206, 5%, 65%);
+}
+
+/* Avatar button (shown once logged in) */
+.account-avatar-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  padding: 0;
+  border: 1.5px solid hsl(206, 5%, 80%);
+  border-radius: 50%;
+  background: hsl(206, 5%, 96%);
+  color: hsl(216, 22%, 4%);
+  font-size: 1.15rem;
+  cursor: pointer;
+  transition: all 0.2s ease-in-out;
+}
+
+.account-avatar-btn:hover,
+.account-avatar-btn[aria-expanded="true"] {
+  border-color: hsl(349, 100%, 45%);
+  color: hsl(349, 100%, 45%);
+}
+
+/* Dimmed backdrop behind the sidebar */
+.account-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: rgba(0, 0, 0, 0.4);
+  opacity: 0;
+  transition: opacity 0.3s ease-in-out;
+}
+
+.account-overlay.is-visible {
+  opacity: 1;
+}
+
+/* Sidebar panel */
+.account-sidebar {
+  position: fixed;
+  top: 0;
+  right: 0;
+  z-index: 201;
+  width: min(320px, 85vw);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  background: hsl(206, 5%, 100%);
+  box-shadow: -4px 0 16px rgba(0, 0, 0, 0.15);
+  transform: translateX(100%);
+  transition: transform 0.3s ease-in-out;
+}
+
+.account-sidebar.is-open {
+  transform: translateX(0);
+}
+
+.account-sidebar-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  padding: 1.25rem 1.25rem 1rem;
+  border-bottom: 1px solid hsl(206, 5%, 90%);
+}
+
+.account-sidebar-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 50%;
+  background: hsl(206, 5%, 96%);
+  color: hsl(216, 22%, 4%);
+  font-size: 1.5rem;
+}
+
+.account-sidebar-name {
+  margin: 0;
+  font-weight: 700;
+  font-size: 0.95rem;
+  color: hsl(216, 22%, 4%);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 12.5rem;
+}
+
+.account-sidebar-email {
+  margin: 0.15rem 0 0;
+  font-size: 0.8rem;
+  color: hsl(206, 5%, 50%);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  max-width: 12.5rem;
+}
+
+.account-sidebar-close {
+  margin-left: auto;
+  border: none;
+  background: transparent;
+  font-size: 1.4rem;
+  line-height: 1;
+  cursor: pointer;
+  color: hsl(206, 5%, 50%);
+}
+
+.account-sidebar-close:hover {
+  color: hsl(349, 100%, 45%);
+}
+
+.account-sidebar-nav {
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 0;
+}
+
+.account-sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.85rem 1.25rem;
+  border: none;
+  background: none;
+  font-family: inherit;
+  font-size: 0.9rem;
+  font-weight: 500;
+  text-align: left;
+  text-decoration: none;
+  color: hsl(216, 22%, 4%);
+  cursor: pointer;
+  transition: background 0.2s ease-in-out;
+}
+
+.account-sidebar-link i {
+  font-size: 1.15rem;
+  color: hsl(206, 5%, 50%);
+}
+
+.account-sidebar-link:hover {
+  background: hsl(206, 5%, 96%);
+}
+
+.account-sidebar-logout {
+  margin-top: auto;
+  border-top: 1px solid hsl(206, 5%, 90%);
+}
+
+.account-logout-btn {
+  color: hsl(349, 100%, 45%);
+}
+
+.account-logout-btn i {
+  color: hsl(349, 100%, 45%);
+}
