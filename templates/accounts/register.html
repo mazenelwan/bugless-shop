@@ -1,0 +1,16 @@
+{% extends "accounts/base.html" %}
+{% block title %}Create account{% endblock %}
+{% block content %}
+  <section class="account-card">
+    <p class="account-eyebrow">CUSTOMER ACCOUNT</p>
+    <h1>Create your account</h1>
+    <p class="account-intro">Save your details securely and keep your orders together.</p>
+    <form method="post" class="account-form" novalidate>
+      {% csrf_token %}
+      {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
+      {% include "accounts/partials/form_fields.html" %}
+      <button type="submit" class="account-submit">CREATE ACCOUNT</button>
+    </form>
+    <p class="account-switch">Already registered? <a href="{% url 'accounts:login' %}{% if next %}?next={{ next|urlencode }}{% endif %}">Log in</a></p>
+  </section>
+{% endblock %}

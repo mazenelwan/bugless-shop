@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% include "store/partials/head_dependencies.html" %}
+  <title>{% if query %}Search: {{ query }} | {% endif %}Bugless Fit Shop</title>
+  <link rel="stylesheet" href="{% static 'store/css/shop2.css' %}">
+</head>
+<body>
+  {% include "store/partials/public_header.html" %}
+
+  <button type="button" id="cart-toggle-btn" class="cart-toggle-btn" aria-label="Shopping cart" aria-expanded="false">
+    <i class="fas fa-shopping-cart"></i>
+    <span id="cart-count-badge" class="cart-count-badge">0</span>
+  </button>
+
+  <aside id="cart" class="cart-sidebar" aria-label="Shopping cart">
+    <h3>Shopping Cart</h3>
+    <div id="cart-items"></div>
+    <p>Total: EGP <span id="cart-total">0.00</span></p>
+    <button type="button" id="checkout-btn" data-checkout-url="{% url 'store:checkout' %}">Checkout</button>
+    <button type="button" id="clear-cart-btn">Clear Cart</button>
+  </aside>
+
+  <main id="catalog-results">
+    {% for category in categories %}
+      <h1 id="{{ category.slug }}">{{ category.name }}</h1>
+      <div class="products" data-category="{{ category.name|lower }}">
+        {% for product in category.visible_products %}
+          <div class="product-card" data-product-id="{{ product.public_id }}" data-product-url="{% url 'store:product_detail' product.slug %}" data-search-text="{{ category.name|lower }} {{ product.name|lower }} {{ product.sku|lower }}" role="link" tabindex="0" aria-label="View {{ product.name }}">
+            {% with image=product.primary_image %}
+              {% if image %}<img src="{{ image.image }}" alt="{{ image.alt_text|default:product.name }}">{% endif %}
+            {% endwith %}
+            <div class="product-info">
+              <h3>{{ product.name }}</h3>
+              <p>EGP {{ product.price|floatformat:"-2" }}{% if product.old_price %} <del>EGP {{ product.old_price|floatformat:"-2" }}</del>{% endif %}{% if product.rating is not None %} <span class="rating">({{ product.rating|floatformat:1 }}⭐)</span>{% endif %}</p>
+              {% if product.available %}
+                <a href="{% url 'store:product_detail' product.slug %}" class="add-btn" data-add-product="{{ product.public_id }}">Add to cart</a>
+              {% else %}
+                <span class="add-btn" aria-disabled="true">Sold out</span>
+              {% endif %}
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% empty %}
+      <p id="search-no-results">No results found{% if query %} for “{{ query }}”{% endif %}.</p>
+    {% endfor %}
+  </main>
+
+  {% include "store/partials/about_footer.html" %}
+  {{ cart_catalog|json_script:"bf-catalog-data" }}
+  <script src="{% static 'store/js/site.js' %}" defer></script>
+  <script src="{% static 'store/js/cart.js' %}" defer></script>
+  <script src="{% static 'store/js/shop.js' %}" defer></script>
+</body>
+</html>

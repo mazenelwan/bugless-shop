@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{% block title %}Account{% endblock %} | Bugless Fit</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Lato:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'accounts/accounts.css' %}">
+</head>
+<body>
+  <header class="account-header">
+    <nav class="account-navbar" aria-label="Primary navigation">
+      <a href="{% url 'store:home' %}" class="account-brand">BUGLESS FIT</a>
+      <div class="account-public-links">
+        <a href="{% url 'store:home' %}">HOME</a>
+        <a href="{% url 'store:shop' %}">SHOP</a>
+        <a href="{% url 'store:contact' %}">CONTACT</a>
+        <a href="{% url 'store:about' %}">ABOUT</a>
+      </div>
+      <div class="account-user-links">
+        {% if request.user.is_authenticated %}
+          <a href="{% url 'accounts:profile' %}">PROFILE</a>
+          <a href="{% url 'accounts:order_list' %}">ORDERS</a>
+          <form action="{% url 'accounts:logout' %}" method="post">
+            {% csrf_token %}
+            <button type="submit">LOG OUT</button>
+          </form>
+        {% else %}
+          <a href="{% url 'accounts:login' %}">LOG IN</a>
+          <a href="{% url 'accounts:register' %}" class="account-link-emphasis">REGISTER</a>
+        {% endif %}
+      </div>
+    </nav>
+  </header>
+
+  <main class="account-shell">
+    {% if messages %}
+      <div class="account-messages" aria-live="polite">
+        {% for message in messages %}
+          <p class="account-message{% if message.tags %} {{ message.tags }}{% endif %}">{{ message }}</p>
+        {% endfor %}
+      </div>
+    {% endif %}
+    {% block content %}{% endblock %}
+  </main>
+</body>
+</html>

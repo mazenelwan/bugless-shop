@@ -1,0 +1,94 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% include "store/partials/head_dependencies.html" %}
+  <title>Bugless Fit</title>
+  <link rel="stylesheet" href="{% static 'store/css/home.css' %}">
+</head>
+<body>
+  {% include "store/partials/public_header.html" %}
+
+  <section class="slider-section">
+    <div id="carousel" class="carousel slide" data-ride="carousel">
+      <ol class="carousel-indicators">
+        <li data-target="#carousel" data-slide-to="0" class="active"></li>
+        <li data-target="#carousel" data-slide-to="1"></li>
+        <li data-target="#carousel" data-slide-to="2"></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <div class="carousel-item active" style="background-image: url('https://dfcdn.defacto.com.tr/cms/616913d36f064678b67be6737f5e0ad6.jpg');">
+          <div class="carousel-caption d-none d-md-block"><h3>Summer is ending !</h3><h5>but the deals are just starting</h5></div>
+        </div>
+        <div class="carousel-item" style="background-image: url('https://im.uniqlo.com/global-cms/spa/res31bfba9b212d27dbe9fccb7081536b37fr.jpg');">
+          <div class="carousel-caption d-none d-md-block"><h3>Stay warm, stay stylish</h3><h5>Winter Collection is here</h5></div>
+        </div>
+        <div class="carousel-item" style="background-image: url('https://im.uniqlo.com/global-cms/spa/rese20b9c5f646709fe1192bf7a625028cbfr.jpg');">
+          <div class="carousel-caption d-none d-md-block"><h3>Joyful moments</h3><h5>cozy winters</h5></div>
+        </div>
+      </div>
+      <a href="#carousel" class="carousel-control-prev" role="button" data-slide="prev"><span class="carousel-control-prev-icon" aria-hidden="true"></span><span class="sr-only">Previous</span></a>
+      <a href="#carousel" class="carousel-control-next" role="button" data-slide="next"><span class="carousel-control-next-icon" aria-hidden="true"></span><span class="sr-only">Next</span></a>
+    </div>
+  </section>
+
+  <section class="container">
+    <nav class="nav nav-pills justify-content-center mb-4" aria-label="Store sections">
+      <ul class="nav">
+        <li class="nav-item"><a href="{% url 'store:home' %}" class="nav-link active" data-rel="project">HOME</a></li>
+        <li class="nav-item"><a href="{% url 'store:shop' %}" class="nav-link" data-rel="option-1">SHOP</a></li>
+        <li class="nav-item"><a href="{% url 'store:contact' %}" class="nav-link" data-rel="option-3">CONTACT</a></li>
+        <li class="nav-item"><a href="{% url 'store:about' %}" class="nav-link" data-rel="option-2">ABOUT</a></li>
+      </ul>
+    </nav>
+
+    <div class="portfolio">
+      <div class="portfolio-slider">
+        {% for category in categories|slice:":3" %}
+          <div class="project option-{{ forloop.counter }}" data-search-text="{{ category.name|lower }}">
+            <div class="project-image"><img src="{{ category.image }}" alt="{{ category.name }}"></div>
+            <div class="project-info">
+              {% if forloop.first %}<h1 class="project-info-title">{{ category.name }}</h1>{% else %}<h2 class="project-info-title">{{ category.name }}</h2>{% endif %}
+              <a class="project-info-button" href="{% url 'store:shop' %}#{{ category.slug }}">SHOP NOW</a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      <section id="banner" class="section-m1" style="background-image: url(''); background-size: cover; background-position: center; padding: 50px; color: white; text-align: center;">
+        <h2>Up to <span>60% off</span> - All Tshirts and Shoes</h2>
+        <button><a class="btn normal" href="{% url 'store:shop' %}">Explore More</a></button>
+      </section>
+
+      <div class="portfolio-slider">
+        {% for category in categories|slice:"3:" %}
+          <div class="project {% if forloop.counter == 1 %}option-2{% elif forloop.counter == 2 %}option-3{% else %}option-1{% endif %}" data-search-text="{{ category.name|lower }}">
+            <div class="project-image"><img src="{{ category.image }}" alt="{{ category.name }}"></div>
+            <div class="project-info">
+              <h2 class="project-info-title">{{ category.name }}</h2>
+              <a class="project-info-button" href="{% url 'store:shop' %}#{{ category.slug }}">SHOP NOW</a>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    </div>
+  </section>
+
+  <section id="sm-banner" class="section-p1">
+    <div class="banner-box" style="background-image: url('https://www.louisvuitton.com/images/is/image/lv/M_BC_NEWFORMALSS26_AUG25_05_DI3.jpg?wid=2400'); background-size: cover; background-position: center; padding: 20px; color: white;">
+      <h4>crazy deals</h4><h2>buy 1 get 1 free</h2><span>The best sales in bugless fit !</span>
+      <a href="{% url 'store:shop' %}" class="btn white">Learn more</a>
+    </div>
+    <div class="banner-box banner-box2" style="background-image: url('https://im.uniqlo.com/global-cms/spa/res31bfba9b212d27dbe9fccb7081536b37fr.jpg'); background-size: cover; background-position: center; padding: 20px; color: white;">
+      <h4>Autumn/winter</h4><h2>upcoming season</h2><span>Hot Discounts for Cold Days</span>
+      <a href="{% url 'store:shop' %}" class="btn white">Collection</a>
+    </div>
+  </section>
+
+  {% include "store/partials/about_footer.html" %}
+  <script src="{% static 'store/js/site.js' %}" defer></script>
+  <script src="{% static 'store/js/home.js' %}" defer></script>
+</body>
+</html>

@@ -1,0 +1,27 @@
+<header class="header" id="header">
+  <nav class="navbar container">
+    <a href="{% url 'store:home' %}" class="brand">Bugless Fit</a>
+    <div class="search">
+      <form class="search-form" action="{% url 'store:search' %}" method="get">
+        <i class="bx bx-search search-icon"></i>
+        <input type="search" name="q" value="{{ query|default:'' }}" class="search-input" placeholder="Search products" aria-label="Search products">
+      </form>
+    </div>
+
+    <div class="menu" id="menu">
+      <ul class="menu-inner">
+        <li class="menu-item"><a href="{% url 'store:home' %}" class="menu-link{% if request.resolver_match.url_name == 'home' %} active{% endif %}">HOME</a></li>
+        <li class="menu-item"><a href="{% url 'store:shop' %}" class="menu-link{% if request.resolver_match.url_name == 'shop' or request.resolver_match.url_name == 'search' or request.resolver_match.url_name == 'product_detail' %} active{% endif %}">SHOP</a></li>
+        <li class="menu-item"><a href="{% url 'store:contact' %}" class="menu-link{% if request.resolver_match.url_name == 'contact' %} active{% endif %}">CONTACT</a></li>
+        <li class="menu-item"><a href="{% url 'store:about' %}" class="menu-link{% if request.resolver_match.url_name == 'about' %} active{% endif %}">ABOUT</a></li>
+      </ul>
+    </div>
+
+    <div class="burger" id="burger" role="button" tabindex="0" aria-label="Open menu" aria-expanded="false">
+      <span class="burger-line"></span>
+      <span class="burger-line"></span>
+      <span class="burger-line"></span>
+    </div>
+  </nav>
+</header>
+

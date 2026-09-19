@@ -1,0 +1,115 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{ product.name }} | Bugless Fit</title>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+  <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+  <link rel="stylesheet" href="{% static 'store/css/product.css' %}">
+</head>
+<body>
+  <header class="header" id="header">
+    <nav class="navbar">
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false"><span class="burger-line"></span><span class="burger-line"></span><span class="burger-line"></span></button>
+      <a href="{% url 'store:home' %}" class="brand">Bugless Fit</a>
+      <div class="header-actions">
+        <form class="search-form" id="product-search" action="{% url 'store:search' %}" method="get"><i class="bx bx-search"></i><input class="search-input" type="search" name="q" aria-label="Search products" placeholder="Search products"></form>
+        <button type="button" id="cart-toggle-btn" class="cart-toggle-btn" aria-label="Shopping cart" aria-expanded="false"><i class="fas fa-shopping-cart"></i><span id="cart-count-badge" class="cart-count-badge">0</span></button>
+      </div>
+      <div class="menu" id="menu">
+        <ul class="menu-inner">
+          <li><a href="{% url 'store:home' %}" class="menu-link">HOME</a></li>
+          <li><a href="{% url 'store:shop' %}" class="menu-link active">SHOP</a></li>
+          <li><a href="{% url 'store:contact' %}" class="menu-link">CONTACT</a></li>
+          <li><a href="{% url 'store:about' %}" class="menu-link">ABOUT</a></li>
+        </ul>
+      </div>
+    </nav>
+  </header>
+
+  <aside id="cart" class="cart-sidebar" aria-label="Shopping cart">
+    <h2>Shopping Cart</h2>
+    <div id="cart-items"></div>
+    <p>Total: EGP <span id="cart-total">0.00</span></p>
+    <div class="cart-actions">
+      <button id="checkout-btn" data-checkout-url="{% url 'store:checkout' %}">Checkout</button>
+      <button id="clear-cart-btn">Clear</button>
+    </div>
+  </aside>
+
+  <main class="product-page">
+    <p class="crumb"><a href="{% url 'store:shop' %}">Shop</a> / <span id="crumb-category">{{ product.category.name }}</span></p>
+    <div id="product-root" data-product-id="{{ product.public_id }}" data-checkout-url="{% url 'store:checkout' %}" data-has-variants="{{ product.uses_variants|yesno:'true,false' }}" data-available="{{ product.available|yesno:'true,false' }}">
+      <div class="product-layout">
+        <section class="gallery">
+          <div class="thumbs">
+            {% for image in product.images.all %}
+              <button class="thumb{% if forloop.first %} active{% endif %}" data-image="{{ forloop.counter0 }}" data-image-url="{{ image.image }}" aria-label="View image {{ forloop.counter }}"><img src="{{ image.image }}" alt=""></button>
+            {% endfor %}
+          </div>
+          {% with image=product.primary_image %}
+            <div class="main-image">{% if image %}<img id="main-product-image" src="{{ image.image }}" alt="{{ image.alt_text|default:product.name }}">{% endif %}</div>
+          {% endwith %}
+        </section>
+
+        <section class="product-info">
+          <h1>{{ product.name }}</h1>
+          <p class="sku">PRODUCT ID: {{ product.sku }}</p>
+          <div class="price-row"><span class="price">EGP {{ product.price|floatformat:2 }}</span>{% if product.old_price %} <del>EGP {{ product.old_price|floatformat:2 }}</del>{% endif %}</div>
+          <p class="stock">{% if product.available %}In stock{% else %}Out of stock{% endif %}</p>
+          <div class="payment"><strong>ACCEPTED PAYMENT METHODS</strong><span>Available at checkout</span></div>
+
+          {% if color_options %}
+            <section class="selection">
+              <h2>Color</h2>
+              <div class="options">
+                {% for color in color_options %}<button class="option{% if forloop.first %} selected{% endif %}" type="button" data-color="{{ color }}">{{ color }}</button>{% endfor %}
+              </div>
+            </section>
+          {% endif %}
+          {% if size_options %}
+            <section class="selection">
+              <h2>Size</h2>
+              <div class="options">
+                {% for size in size_options %}<button class="option{% if forloop.first %} selected{% endif %}" type="button" data-size="{{ size }}">{{ size }}</button>{% endfor %}
+              </div>
+            </section>
+          {% endif %}
+
+          <section class="selection">
+            <h2>Quantity</h2>
+            <div class="quantity"><button id="minus" type="button" aria-label="Decrease quantity">−</button><output id="quantity">1</output><button id="plus" type="button" aria-label="Increase quantity">+</button></div>
+          </section>
+          <div class="product-actions">
+            <button class="action add" id="add-to-cart" type="button"{% if not product.available %} disabled{% endif %}>ADD TO CART</button>
+            <button class="action buy" id="buy-now" type="button"{% if not product.available %} disabled{% endif %}>BUY IT NOW</button>
+          </div>
+          <p class="validation" id="validation" aria-live="polite"></p>
+          <details class="accordion"><summary>DESCRIPTION</summary><p>{{ product.description }}</p></details>
+        </section>
+      </div>
+
+      <section class="related">
+        <h2>RELATED PRODUCTS</h2>
+        <div class="related-grid" id="related-products">
+          {% for item in related %}
+            <a class="related-card" href="{% url 'store:product_detail' item.slug %}">
+              {% with image=item.primary_image %}{% if image %}<img src="{{ image.image }}" alt="{{ image.alt_text|default:item.name }}">{% endif %}{% endwith %}
+              <h3>{{ item.name }}</h3><p>EGP {{ item.price|floatformat:2 }}</p>
+            </a>
+          {% endfor %}
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <footer class="site-footer"><div class="footer-inner"><h2>BUGLESS FIT</h2><p>Modern essentials for every day.</p></div></footer>
+  {{ cart_catalog|json_script:"bf-catalog-data" }}
+  {{ variant_payload|json_script:"bf-variant-data" }}
+  <script src="{% static 'store/js/site.js' %}" defer></script>
+  <script src="{% static 'store/js/cart.js' %}" defer></script>
+  <script src="{% static 'store/js/product.js' %}" defer></script>
+</body>
+</html>

@@ -1,0 +1,64 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% include "store/partials/head_dependencies.html" %}
+  <title>Checkout - Bugless Fit</title>
+  <link rel="stylesheet" href="{% static 'store/css/checkout.css' %}">
+</head>
+<body>
+  {% include "store/partials/public_header.html" %}
+
+  <section class="checkout-page-sec">
+    <div class="container">
+      <h1 class="checkout-title">Checkout</h1>
+      <div class="checkout-layout">
+        <div class="checkout-summary">
+          <h2>Order Summary</h2>
+          <div id="checkout-items"></div>
+          <div class="promo-code-box">
+            <input type="text" id="promo-code-input" placeholder="Promo Code" autocomplete="off" maxlength="40">
+            <button type="button" id="apply-promo-btn">Apply</button>
+          </div>
+          <p id="promo-message" class="promo-message" aria-live="polite"></p>
+          <div class="checkout-totals">
+            <p class="subtotal-line">Subtotal: EGP <span id="checkout-subtotal">0.00</span></p>
+            <p class="discount-line" id="discount-line" style="display:none;">Discount: -EGP <span id="checkout-discount">0.00</span></p>
+            <p class="checkout-total-line">Total: EGP <span id="checkout-total">0.00</span></p>
+          </div>
+        </div>
+
+        <div class="checkout-form-wrap">
+          <p id="empty-cart-msg" class="empty-cart-msg" style="display:none;">Your cart is empty. <a href="{% url 'store:shop' %}">Go shopping</a></p>
+          <form id="checkout-form" novalidate data-create-url="{% url 'store:create_order' %}" data-quote-url="{% url 'store:quote_order' %}">
+            {% csrf_token %}
+            <h2>Shipping Details</h2>
+            <div class="single-input-field"><input type="text" placeholder="Full Name" name="name" autocomplete="name" maxlength="160" value="{{ initial_customer.name }}" required></div>
+            <div class="single-input-field"><input type="email" placeholder="E-mail" name="email" autocomplete="email" maxlength="254" value="{{ initial_customer.email }}" required></div>
+            <div class="single-input-field"><input type="tel" placeholder="Phone Number" name="phone" autocomplete="tel" maxlength="40" required></div>
+            <div class="single-input-field"><input type="text" placeholder="Address" name="address" autocomplete="street-address" maxlength="500" required></div>
+            <div class="single-input-field message-input"><textarea placeholder="Order Notes (optional)" name="notes" maxlength="2000"></textarea></div>
+            <button type="submit" class="confirm-order-btn" id="confirm-order-btn">Confirm Order</button>
+            <p id="checkout-status" class="promo-message" aria-live="polite"></p>
+          </form>
+
+          <div id="order-confirmation" class="order-confirmation" style="display:none;">
+            <h2>Thank you!</h2>
+            <p>Your order <strong id="order-number"></strong> has been received.</p>
+            <p class="confirmation-note">Your confirmed order details will appear here.</p>
+            <a href="{% url 'store:home' %}" class="home-btn"><i class="fas fa-home"></i> Back to Home</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  {% include "store/partials/about_footer.html" %}
+  {{ cart_catalog|json_script:"bf-catalog-data" }}
+  <script src="{% static 'store/js/site.js' %}" defer></script>
+  <script src="{% static 'store/js/cart.js' %}" defer></script>
+  <script src="{% static 'store/js/checkout.js' %}" defer></script>
+</body>
+</html>

@@ -1,0 +1,50 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  {% include "store/partials/head_dependencies.html" %}
+  <title>Order {{ order.number }} | Bugless Fit</title>
+  <meta name="robots" content="noindex,nofollow">
+  <link rel="stylesheet" href="{% static 'store/css/checkout.css' %}">
+</head>
+<body>
+  {% include "store/partials/public_header.html" %}
+  <section class="checkout-page-sec">
+    <div class="container">
+      <div class="checkout-layout">
+        <div class="checkout-summary">
+          <h2>Order {{ order.number }}</h2>
+          {% for item in order.items.all %}
+            <div class="checkout-item">
+              <span class="checkout-item-name">
+                {{ item.product_name }}{% if item.variant_label %} · {{ item.variant_label }}{% endif %} × {{ item.quantity }}
+              </span>
+              <span class="checkout-item-price">{{ order.currency }} {{ item.subtotal|floatformat:2 }}</span>
+            </div>
+          {% endfor %}
+          <div class="checkout-totals">
+            <p class="subtotal-line">Subtotal: {{ order.currency }} {{ order.subtotal_amount|floatformat:2 }}</p>
+            {% if order.discount_amount %}<p class="discount-line">Discount: -{{ order.currency }} {{ order.discount_amount|floatformat:2 }}</p>{% endif %}
+            <p class="subtotal-line">Delivery: {{ order.currency }} {{ order.delivery_fee|floatformat:2 }}</p>
+            <p class="subtotal-line">Tax: {{ order.currency }} {{ order.tax_amount|floatformat:2 }}</p>
+            <p class="checkout-total-line">Total: {{ order.currency }} {{ order.total_amount|floatformat:2 }}</p>
+          </div>
+        </div>
+        <div class="order-confirmation" style="display:block;">
+          <h1>Thank you!</h1>
+          <p>Your order <strong>{{ order.number }}</strong> has been received.</p>
+          <p class="confirmation-note">Status: {{ order.get_status_display }} · {{ order.get_payment_method_display }}</p>
+          <p class="confirmation-note">Delivery to {{ order.customer_name }}, {{ order.address }}{% if order.city %}, {{ order.city }}{% endif %}.</p>
+          {% if request.user.is_authenticated and order.customer_id == request.user.pk %}
+            <a href="{% url 'accounts:order_detail' order.number %}" class="home-btn">View in My Orders</a>
+          {% endif %}
+          <a href="{% url 'store:home' %}" class="home-btn"><i class="fas fa-home"></i> Back to Home</a>
+        </div>
+      </div>
+    </div>
+  </section>
+  <script src="{% static 'store/js/site.js' %}" defer></script>
+</body>
+</html>

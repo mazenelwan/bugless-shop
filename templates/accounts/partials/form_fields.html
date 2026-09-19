@@ -1,0 +1,19 @@
+{% if rate_limit_error %}
+  <div class="form-error-summary" role="alert">{{ rate_limit_error }}</div>
+{% endif %}
+{% if form.non_field_errors %}
+  <div class="form-error-summary" role="alert">
+    {% for error in form.non_field_errors %}<p>{{ error }}</p>{% endfor %}
+  </div>
+{% endif %}
+{% for hidden in form.hidden_fields %}
+  {{ hidden }}
+{% endfor %}
+{% for field in form.visible_fields %}
+  <div class="form-field{% if field.errors %} form-field-error{% endif %}">
+    <label for="{{ field.id_for_label }}">{{ field.label }}</label>
+    {{ field }}
+    {% if field.help_text %}<div class="form-help">{{ field.help_text|safe }}</div>{% endif %}
+    {% for error in field.errors %}<p class="form-error" role="alert">{{ error }}</p>{% endfor %}
+  </div>
+{% endfor %}

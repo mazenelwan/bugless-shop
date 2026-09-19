@@ -1,0 +1,36 @@
+{% extends "accounts/base.html" %}
+{% block title %}Order {{ order.number }}{% endblock %}
+{% block content %}
+  <section class="account-card account-card-wide">
+    <a class="account-back" href="{% url 'accounts:order_list' %}">← All orders</a>
+    <p class="account-eyebrow">ORDER DETAILS</p>
+    <h1>{{ order.number }}</h1>
+    <div class="order-meta">
+      <p><span>Status</span><strong>{{ order.get_status_display }}</strong></p>
+      <p><span>Payment</span><strong>{{ order.get_payment_status_display }}</strong></p>
+      <p><span>Placed</span><strong>{{ order.created_at|date:"M j, Y, g:i a" }}</strong></p>
+    </div>
+    <div class="order-items">
+      {% for item in order.items.all %}
+        <div class="order-item-row">
+          <span><strong>{{ item.product_name }}</strong>{% if item.variant_label %}<small>{{ item.variant_label }}</small>{% endif %}<small>Qty {{ item.quantity }}</small></span>
+          <strong>{{ order.currency }} {{ item.subtotal|floatformat:2 }}</strong>
+        </div>
+      {% endfor %}
+    </div>
+    <div class="order-totals">
+      <p><span>Subtotal</span><strong>{{ order.currency }} {{ order.subtotal_amount|floatformat:2 }}</strong></p>
+      <p><span>Discount</span><strong>− {{ order.currency }} {{ order.discount_amount|floatformat:2 }}</strong></p>
+      <p><span>Delivery</span><strong>{{ order.currency }} {{ order.delivery_fee|floatformat:2 }}</strong></p>
+      <p><span>Tax</span><strong>{{ order.currency }} {{ order.tax_amount|floatformat:2 }}</strong></p>
+      <p class="order-total"><span>Total</span><strong>{{ order.currency }} {{ order.total_amount|floatformat:2 }}</strong></p>
+    </div>
+    <div class="order-address">
+      <h2>Delivery details</h2>
+      <p>{{ order.customer_name }}</p>
+      <p>{{ order.address }}{% if order.city %}, {{ order.city }}{% endif %}</p>
+      <p>{{ order.phone }}</p>
+      <p>{{ order.email }}</p>
+    </div>
+  </section>
+{% endblock %}

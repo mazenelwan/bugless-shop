@@ -1,0 +1,19 @@
+{% extends "accounts/base.html" %}
+{% block title %}Log in{% endblock %}
+{% block content %}
+  <section class="account-card">
+    <p class="account-eyebrow">WELCOME BACK</p>
+    <h1>Log in</h1>
+    <p class="account-intro">Use the email address connected to your Bugless Fit account.</p>
+    <form method="post" class="account-form" novalidate>
+      {% csrf_token %}
+      {% if next %}<input type="hidden" name="next" value="{{ next }}">{% endif %}
+      {% include "accounts/partials/form_fields.html" %}
+      <button type="submit" class="account-submit">LOG IN</button>
+    </form>
+    <div class="account-secondary-actions">
+      <a href="{% url 'accounts:password_reset' %}">Forgot your password?</a>
+      <span>New here? <a href="{% url 'accounts:register' %}{% if next %}?next={{ next|urlencode }}{% endif %}">Create an account</a></span>
+    </div>
+  </section>
+{% endblock %}

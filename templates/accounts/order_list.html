@@ -1,0 +1,24 @@
+{% extends "accounts/base.html" %}
+{% block title %}Orders{% endblock %}
+{% block content %}
+  <section class="account-card account-card-wide">
+    <p class="account-eyebrow">YOUR ACCOUNT</p>
+    <h1>Orders</h1>
+    {% if orders %}
+      <div class="order-list">
+        {% for order in orders %}
+          <a class="order-row" href="{% url 'accounts:order_detail' order.number %}">
+            <span><strong>{{ order.number }}</strong><small>{{ order.created_at|date:"M j, Y, g:i a" }}</small></span>
+            <span><strong>{{ order.currency }} {{ order.total_amount|floatformat:2 }}</strong><small>{{ order.get_status_display }}</small></span>
+          </a>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="account-empty">
+        <h2>No account orders yet</h2>
+        <p>Guest orders are not attached by email. New signed-in checkouts will appear here.</p>
+        <a href="{% url 'store:shop' %}" class="account-submit account-button-link">SHOP NOW</a>
+      </div>
+    {% endif %}
+  </section>
+{% endblock %}

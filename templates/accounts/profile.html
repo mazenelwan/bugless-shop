@@ -1,0 +1,18 @@
+{% extends "accounts/base.html" %}
+{% block title %}Profile{% endblock %}
+{% block content %}
+  <section class="account-card account-card-wide">
+    <p class="account-eyebrow">YOUR ACCOUNT</p>
+    <h1>Profile</h1>
+    <p class="account-intro">Update the name and email used for your account login.</p>
+    <form method="post" class="account-form" novalidate>
+      {% csrf_token %}
+      {% include "accounts/partials/form_fields.html" %}
+      <button type="submit" class="account-submit">SAVE PROFILE</button>
+    </form>
+    <div class="account-action-grid">
+      <a href="{% url 'accounts:order_list' %}">View orders</a>
+      <a href="{% url 'accounts:password_change' %}">Change password</a>
+    </div>
+  </section>
+{% endblock %}
